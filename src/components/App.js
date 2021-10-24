@@ -19,10 +19,11 @@ function reducer(state, action) {
 }
 
 function App() {
-  // const [posts, setPosts] = useState([]);
-  // const [check, setCheck] = useState(false);
-  // const [type, setType] = useState('posts');
+  const [posts, setPosts] = useState([]);
+  const [check, setCheck] = useState(false);
+  const [type, setType] = useState('posts');
   const titleInputRef = useRef(null);
+  console.log(titleInputRef);
 
   const { theme, setTheme } = useContext(ThemeContext);
   const [data, dispatch] = useReducer(reducer, { posts: [], check: false, type: 'posts' }, init);
@@ -32,7 +33,7 @@ function App() {
     fetch(`https://jsonplaceholder.typicode.com/${data.type}`)
       .then(response => response.json())
       .then(json => {
-        // setPosts(json)
+        setPosts(json);
       });
     return () => {
       document.title = 'Page';
@@ -41,7 +42,7 @@ function App() {
 
   const change = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
-    // setCheck(!data.check);
+    setCheck(!data.check);
   };
 
   const handleFocus = () => {
